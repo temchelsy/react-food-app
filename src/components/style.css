@@ -127,3 +127,14 @@ h4 {
     font-style: italic;
     color: floralwhite;
 }
+
+button {
+    background-color: white;
+    font-style: italic;
+    color: black;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
