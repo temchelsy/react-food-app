@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Mealitem from "../components/MealItem";
 
 export default function Favorites() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ export default function Favorites() {
       setFavorites(storedFavorites);
     }
   }, []);
-  console.log(favorites)
+  console.log(favorites);
 
   const goBack = () => {
     navigate("/Home", { replace: true });
@@ -21,14 +22,13 @@ export default function Favorites() {
     <div className="fav">
       <h2>My Favorite Page</h2>
 
-      <pre>
-        {JSON.stringify(favorites, null, 4)}
-      </pre>
-      {favorites.length > 0 ? (
-                        favorites.map((favorites) => favorites.strMeal)
-                ) : (
-                    <p>No favorite recipes found.</p>
-                )}
+      <div className="fav-container">
+        {favorites.length > 0 ? (
+          favorites.map((favorite) => <Mealitem data={favorite} />)
+        ) : (
+          <p>No favorite recipes found.</p>
+        )}
+      </div>
       <button id="back" onClick={goBack}>
         Back
       </button>

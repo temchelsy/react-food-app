@@ -200,3 +200,9 @@ h2 {
   margin-bottom: 30rem;
 }
 
+.fav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
