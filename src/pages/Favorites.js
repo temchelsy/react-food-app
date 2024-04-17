@@ -7,7 +7,7 @@ export default function Favorites() {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem("favorites"));
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites"));  
     if (storedFavorites) {
       setFavorites(storedFavorites);
     }

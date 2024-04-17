@@ -187,6 +187,7 @@ button {
   font-size: 16px;
   cursor: pointer;
   margin: auto;
+  margin-bottom: 10rem;
 }
 
 #back:hover {
