@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Mealitem from "./MealItem";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
@@ -8,20 +8,28 @@ const Meal = () => {
   const [search, setSearch] = useState("");
   const [Mymeal, setMeal] = useState([]);
 
-  const searchMeal = async (evt) => {
-    if (evt.key === "Enter") {
-      try {
-        const response = await fetch(
-          `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`
-        );
-        const data = await response.json();
-        setMeal(data.meals || []);
-        setSearch("");
-      } catch (error) {
-        console.error("Error fetching meal data:", error);
+  useEffect(() => {
+    const searchMeal = async () => {
+      if (search.length > 0) {
+        try {
+          const response = await fetch(
+            `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`
+          );
+          const data = await response.json();
+          setMeal(data.meals || []);
+        } catch (error) {
+          console.error("Error fetching meal data:", error);
+        }
       }
-    }
-  };
+    };
+
+    
+    const timeoutId = setTimeout(() => {
+      searchMeal();
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [search]);
 
   const showClick = () => {
     navigate("/Favorites", { replace: true });
@@ -40,7 +48,6 @@ const Meal = () => {
           placeholder="Search your meal..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          onKeyUp={searchMeal}
         />
       </div>
       <div className="container">
